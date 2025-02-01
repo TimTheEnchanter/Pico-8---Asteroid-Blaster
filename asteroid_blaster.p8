@@ -1,5 +1,38 @@
 pico-8 cartridge // http://www.pico-8.com
 version 39
+__lua__
+player = {} 
+player.x = 20 
+player.y = 50 
+player.sprite = 0 
+player.speed = 2 
+player.moving = false 
+
+function _update() 
+    player.moving = false
+    if (btn(2)) then 
+        player.y -= player.speed 
+        if player.y < -10 then 
+            player.y = 128 
+        end
+         
+    end
+    if (btn(3)) then
+        player.y += player.speed
+        if player.y > 128 then
+            player.y = -10
+        end
+        
+    end
+    if not player.moving then
+        player.sprite = 0
+    end
+end
+
+function _draw()
+    cls() 
+    spr( player.sprite, player.x, player.y)
+end
 __gfx__
 00000000000000000000000000111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000004444000000000001288210000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
