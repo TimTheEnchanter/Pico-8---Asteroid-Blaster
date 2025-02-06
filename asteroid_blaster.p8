@@ -1,15 +1,41 @@
 pico-8 cartridge // http://www.pico-8.com
 version 39
 __lua__
+t=0
 player = {} 
 player.x = 20 
 player.y = 50 
 player.sprite = 0 
 player.speed = 2 
-player.moving = false 
+player.moving = false
+bullets = {} 
+
+function fire()
+	local b = {
+  sp=3,
+  x=player.x,
+  y=player.y,
+  dx=4,
+  dy=0
+ }
+ add(bullets,b)
+end
 
 function _update() 
     player.moving = false
+    t=t+1
+ 
+			 for b in all(bullets) do
+			  b.x+=b.dx
+			  b.y+=b.dy
+			 end
+			 if(t%6<3) then
+			  player.speed=1
+			 else
+			  player.speed=2
+			 end
+    
+    
     if (btn(2)) then 
         player.y -= player.speed 
         if player.y < -10 then 
@@ -25,19 +51,18 @@ function _update()
         
     end
     
-    if (btn(5)) then
-        shot = {}
-        shot.x = player.x 
-								shot.y = player.y
-								shot.sprite = 3 
-								shot.speed = 6
+    if (btnp(4)) then
+        fire()
     end
     
 end
 
 function _draw()
     cls() 
-    spr( player.sprite, player.x, player.y)
+    spr(player.sprite, player.x, player.y)
+				for b in all(bullets) do 
+			  spr(b.sp,b.x,b.y)
+			 end
 end
 __gfx__
 00000000000000000000000000111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
