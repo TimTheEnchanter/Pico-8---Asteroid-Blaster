@@ -2,13 +2,25 @@ pico-8 cartridge // http://www.pico-8.com
 version 39
 __lua__
 t=0
-player = {} 
-player.x = 20 
-player.y = 50 
-player.sprite = 0 
-player.speed = 2 
-player.moving = false
-bullets = {} 
+
+function init()
+	player = {} 
+	player.x = 20 
+	player.y = 50 
+	player.sprite = 0 
+	player.speed = 2 
+	player.moving = false
+	bullets = {}
+	enemies = {}
+
+ for i=1,10 do
+ add(enemies, {
+  sp=1,
+  x=60-i*8,
+  y=i*16
+ })
+ end
+end 
 
 function fire()
 	local b = {
@@ -30,6 +42,7 @@ function _update()
 			  b.y+=b.dy
 			  
 			  if b.x < 0 or b.x > 128 or
+   b.y < 0 or b.y > 128 then
 			    del(bullets,b)
 			  end
 			 end
@@ -64,8 +77,13 @@ end
 function _draw()
     cls() 
     spr(player.sprite, player.x, player.y)
+				
 				for b in all(bullets) do 
 			  spr(b.sp,b.x,b.y)
+			 end
+			 
+			 for e in all(enemies) do
+			  spr(e.sp,e.x,e.y)
 			 end
 end
 __gfx__
