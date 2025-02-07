@@ -28,6 +28,10 @@ function _update()
 			 for b in all(bullets) do
 			  b.x+=b.dx
 			  b.y+=b.dy
+			  
+			  if b.x < 0 or b.x > 128 or
+			    del(bullets,b)
+			  end
 			 end
 			 if(t%6<3) then
 			  player.speed=1
