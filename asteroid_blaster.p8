@@ -92,9 +92,9 @@ function _draw()
 			 
 			 for i=1,4 do
 			  if i<=ship.h then 
-			  spr(33,80+6*i,3)
+			  spr(16,80+6*i,3)
 			  else
-			  spr(34,80+6*i,3)
+			  spr(17,80+6*i,3)
 			  end
 			 end
 end
