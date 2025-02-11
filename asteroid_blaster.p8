@@ -8,8 +8,8 @@ function _init()
 	player.x = 20 
 	player.y = 50 
 	player.sprite = 0 
-	player.speed = 2 
-	player.moving = false
+	player.h = 3 
+	
 	bullets = {}
 	enemies = {}
 
@@ -88,6 +88,14 @@ function _draw()
 			 
 			 for e in all(enemies) do
 			  spr(e.sp,e.x,e.y)
+			 end
+			 
+			 for i=1,4 do
+			  if i<=ship.h then 
+			  spr(33,80+6*i,3)
+			  else
+			  spr(34,80+6*i,3)
+			  end
 			 end
 end
 __gfx__
