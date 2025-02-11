@@ -3,7 +3,7 @@ version 39
 __lua__
 t=0
 
-function init()
+function _init()
 	player = {} 
 	player.x = 20 
 	player.y = 50 
@@ -37,7 +37,7 @@ function fire()
 end
 
 function _update() 
-    player.moving = false
+    
     t=t+1
  
  			for e in all(enemies) do
@@ -54,11 +54,7 @@ function _update()
 			    del(bullets,b)
 			  end
 			 end
-			 if(t%6<3) then
-			  player.speed=1
-			 else
-			  player.speed=2
-			 end
+			 
     
     
     if (btn(2)) then 
