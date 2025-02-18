@@ -91,7 +91,7 @@ function _draw()
 			 end
 			 
 			 for i=1,4 do
-			  if i<=ship.h then 
+			  if i<=player.h then 
 			  spr(16,80+6*i,3)
 			  else
 			  spr(17,80+6*i,3)
