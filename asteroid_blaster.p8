@@ -1,19 +1,19 @@
 pico-8 cartridge // http://www.pico-8.com
 version 39
 __lua__
-t=0
-
 function _init()
+	t=0
 	player = {} 
 	player.x = 20 
 	player.y = 50 
 	player.sprite = 0 
-	player.h = 3 
+	player.h = 3
+	player.p = 0 
 	
 	bullets = {}
 	enemies = {}
 
- for i=1,10 do
+ for i=1,4 do
  add(enemies, {
   sp=1,
   m_x=i*16,
@@ -24,6 +24,10 @@ function _init()
  })
  end
 end 
+
+function coll(a,b)
+ -- todo
+end
 
 function fire()
 	local b = {
@@ -43,6 +47,10 @@ function _update()
  			for e in all(enemies) do
 			  e.x = e.r*sin(t/50) + e.m_x
 			  e.y = e.r*cos(t/50) + e.m_y
+			 	if coll(ship,e) then
+			    --todo
+			  
+			  end
 			 end
  
 			 for b in all(bullets) do
@@ -53,6 +61,14 @@ function _update()
    b.y < 0 or b.y > 128 then
 			    del(bullets,b)
 			  end
+			  
+			  for e in all(enemies) do
+			   if coll(b,e) then
+			    del(enemies,e)
+			    ship.p += 1
+			   end
+			  end
+			  
 			 end
 			 
     
@@ -79,7 +95,8 @@ function _update()
 end
 
 function _draw()
-    cls() 
+    cls()
+    print(ship.p,9) 
     spr(player.sprite, player.x, player.y)
 				
 				for b in all(bullets) do 
