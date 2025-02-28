@@ -9,6 +9,7 @@ function _init()
 	player.sprite = 0 
 	player.h = 3
 	player.p = 0 
+	player.box = {x1=0,y1=0,x2=7,y2=7}
 	
 	bullets = {}
 	enemies = {}
@@ -20,7 +21,8 @@ function _init()
   m_y=60-i*8,
   x=-32,
   y=-32,
-  r=12
+  r=12,
+  box = {x1=0,y1=0,x2=7,y2=7}
  })
  end
 end 
