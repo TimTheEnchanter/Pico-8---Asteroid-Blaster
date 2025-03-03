@@ -39,6 +39,8 @@ end
 
 function coll(a,b)
  -- todo
+ box_a = abs_box(a)
+ box_b = abs_box(b)
 end
 
 function fire()
