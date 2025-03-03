@@ -49,7 +49,8 @@ function fire()
   x=player.x,
   y=player.y,
   dx=4,
-  dy=0
+  dy=0,
+  box = {x1=2,y1=0,x2=5,y2=4}
  }
  add(bullets,b)
 end
