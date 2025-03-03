@@ -27,6 +27,16 @@ function _init()
  end
 end 
 
+function abs_box(s)
+ local box = {}
+ box.x1 = s.box.x1 + s.x
+ box.y1 = s.box.y1 + s.y
+ box.x2 = s.box.x2 + s.x
+ box.y2 = s.box.y2 + s.y
+ return box
+
+end
+
 function coll(a,b)
  -- todo
 end
