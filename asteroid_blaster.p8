@@ -3,32 +3,32 @@ version 39
 __lua__
 function _init()
 	t=0
-	player = {} 
-	player.x = 20 
-	player.y = 50 
-	player.sprite = 0 
-	player.h = 3
-	player.p = 0 
-	player.box = {x1=0,y1=0,x2=7,y2=7}
+	player = {
+	  sp=1,
+	  x=60,
+	  y=100,
+	  h=3,
+	  p=0,
+	  box = {x1=0,y1=0,x2=7,y2=7}}
 	
 	bullets = {}
 	enemies = {}
 
- for i=1,4 do
- add(enemies, {
-  sp=1,
-  m_x=i*16,
-  m_y=60-i*8,
-  x=-32,
-  y=-32,
-  r=12,
-  box = {x1=0,y1=0,x2=7,y2=7}
- })
- end
+	for i=1,4 do
+		add(enemies, {
+		  sp=1,
+		  m_x=i*16,
+		  m_y=60-i*8,
+		  x=-32,
+		  y=-32,
+		  r=12,
+		  box = {x1=0,y1=0,x2=7,y2=7}
+		})
+	end
 end 
 
 function abs_box(s)
- local box = {}
+ box = {}
  box.x1 = s.box.x1 + s.x
  box.y1 = s.box.y1 + s.y
  box.x2 = s.box.x2 + s.x
@@ -56,46 +56,46 @@ end
 
 function fire()
 	local b = {
-  sp=3,
-  x=player.x,
-  y=player.y,
-  dx=4,
-  dy=0,
-  box = {x1=2,y1=0,x2=5,y2=4}
- }
- add(bullets,b)
+	  sp=3,
+	  x=player.x,
+	  y=player.y,
+	  dx=4,
+	  dy=0,
+	  box = {x1=2,y1=0,x2=5,y2=4}
+	}
+	add(bullets,b)
 end
 
 function _update() 
     
     t=t+1
  
- 			for e in all(enemies) do
-			  e.x = e.r*sin(t/50) + e.m_x
-			  e.y = e.r*cos(t/50) + e.m_y
-			 	if coll(ship,e) then
-			    --todo
+ 	for e in all(enemies) do
+		e.x = e.r*sin(t/50) + e.m_x
+		e.y = e.r*cos(t/50) + e.m_y
+		if coll(player,e) then
+			--todo
 			  
-			  end
-			 end
+		end
+	end
  
-			 for b in all(bullets) do
-			  b.x+=b.dx
-			  b.y+=b.dy
+	for b in all(bullets) do
+		b.x+=b.dx
+		b.y+=b.dy
 			  
-			  if b.x < 0 or b.x > 128 or
-   b.y < 0 or b.y > 128 then
-			    del(bullets,b)
-			  end
+		if b.x < 0 or b.x > 128 or
+		 b.y < 0 or b.y > 128 then
+		    del(bullets,b)
+		end
 			  
-			  for e in all(enemies) do
-			   if coll(b,e) then
+		for e in all(enemies) do
+			if coll(b,e) then
 			    del(enemies,e)
 			    ship.p += 1
-			   end
-			  end
+			end
+		end
 			  
-			 end
+	end
 			 
     
     
@@ -122,24 +122,24 @@ end
 
 function _draw()
     cls()
-    print(ship.p,9) 
+    print(player.p,9) 
     spr(player.sprite, player.x, player.y)
 				
-				for b in all(bullets) do 
-			  spr(b.sp,b.x,b.y)
-			 end
+	for b in all(bullets) do 
+		spr(b.sp,b.x,b.y)
+	end
 			 
-			 for e in all(enemies) do
-			  spr(e.sp,e.x,e.y)
-			 end
+	for e in all(enemies) do
+		spr(e.sp,e.x,e.y)
+	end
 			 
-			 for i=1,4 do
-			  if i<=player.h then 
-			  spr(16,80+6*i,3)
-			  else
-			  spr(17,80+6*i,3)
-			  end
-			 end
+	for i=1,4 do
+		if i<=player.h then 
+			spr(16,80+6*i,3)
+		else
+			spr(17,80+6*i,3)
+		end
+	end
 end
 __gfx__
 00000000000000000000000000111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
