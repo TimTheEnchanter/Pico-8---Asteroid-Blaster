@@ -86,7 +86,7 @@ function fire()
 	add(bullets,b)
 end
 
-function _update() 
+function update_game() 
     
     t=t+1
  
@@ -140,7 +140,7 @@ function _update()
     
 end
 
-function _draw()
+function draw_game()
     cls()
     print(player.p,9) 
     spr(player.sprite, player.x, player.y)
